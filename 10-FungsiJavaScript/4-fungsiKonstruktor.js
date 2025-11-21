@@ -1,0 +1,3 @@
+var namaFungsi = new Function('console.log("Hello World!");');
+
+namaFungsi();
