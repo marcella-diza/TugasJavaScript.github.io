@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COFFEE TIME - Form Pemesanan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- KODE CSS NAVBAR (Disalin dari index.html) --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 80px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08);
+            position: sticky; /* Penting: Navbar tetap di atas */
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #704214;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #3A3A3A;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-left: 30px;
+            padding: 5px 0;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        .nav-links .active {
+            color: #704214;
+            border-bottom: 2px solid #704214;
+        }
+
+        .nav-links a:hover {
+            color: #704214;
+        }
+        /* --- AKHIR KODE CSS NAVBAR --- */
+
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Perubahan: Hapus height: 100vh dan overflow: hidden */
+            min-height: 100vh;
+            background-color: #F7F5EE;
+        }
+
+        /* --- CONTAINER UTAMA (SPLIT SCREEN) --- */
+        .order-page-container {
+            display: flex;
+            width: 100%;
+            /* Padding atas agar tidak tertutup Navbar */
+            padding-top: 0; 
+            
+            /* Batasi ukuran maksimum */
+            max-width: 1440px; 
+            min-height: calc(100vh - 60px); /* Sesuaikan tinggi dengan sisa layar */
+            margin: 0 auto;
+        }
+
+        /* --- SISI KIRI: BACKGROUND GAMBAR KAFFE --- */
+        .image-side {
+            flex: 1; 
+            /* Ganti dengan nama file gambar kafe Anda */
+            background-image: url('image_9e5006.jpg'); 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        /* Overlay gelap di sisi kiri agar tampilan form tidak terganggu */
+        .image-side::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.2); 
+        }
+
+        /* --- SISI KANAN: FORM PEMESANAN --- */
+        .form-side {
+            flex: 1; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background-color: #E5CDB4; /* Warna Beige/Cokelat Muda */
+        }
+
+        .order-form-box {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        /* HEADER & JUDUL */
+        .header-form {
+            text-align: left;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Ikon Panah Kembali */
+        .header-form .back-icon {
+            font-size: 2rem;
+            color: #704214; 
+            margin-right: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            line-height: 1; 
+        }
+
+        /* Judul H1 (dengan gradien sesuai gambar) */
+        .header-form h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #704214 0%, #D69F3E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            margin-bottom: 5px; 
+        }
+
+        /* Deskripsi "Silahkan masukkan..." */
+        .header-form p {
+            font-size: 0.95rem; 
+            font-weight: 400;
+            color: #3A3A3A;
+            margin-top: 0;
+        }
+
+        /* --- INPUT STYLES --- */
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #704214; 
+            margin-bottom: 10px;
+        }
+
+        /* Gaya Input & Select */
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc; 
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #F7F5EE; 
+            color: #3A3A3A;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        /* Style Placeholder */
+        .form-group input::placeholder, .form-group select option[disabled] {
+            color: #999; 
+            font-weight: 300;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #D69F3E;
+            box-shadow: 0 0 0 3px rgba(214, 159, 62, 0.4); 
+            outline: none;
+        }
+
+        /* --- BUTTON KIRIM --- */
+        .btn-kirim {
+            display: block;
+            width: 150px;
+            background-color: #D69F3E; 
+            color: #ffffff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.2s;
+            float: right; 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+            margin-top: 20px;
+        }
+
+        .btn-kirim:hover {
+            background-color: #b8860b;
+            transform: translateY(-2px);
+        }
+
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 992px) {
+            .image-side {
+                display: none; 
+            }
+            .form-side {
+                flex: 100%; 
+            }
+            .order-page-container {
+                /* Form akan diposisikan di tengah layar penuh jika image-side hilang */
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        @media (max-width: 600px) {
+            .header-form h1 {
+                font-size: 2rem;
+            }
+            .form-side {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="navbar">
+       <a href="index.html" class="logo">COFFEE TIME</a> 
+        <nav class="nav-links">
+            <a href="index.html">HOME</a>
+            <a href="coffee.html">COFFEE</a>
+            <a href="bakery.html">BAKERY</a>
+            <a href="order.html" class="active">ORDER</a>
+            <a href="about.html">ABOUT</a>
+        </nav>
+    </header>
+
+
+    <div class="order-page-container">
+
+        <div class="image-side">
+            </div>
+
+        <div class="form-side">
+            <div class="order-form-box">
+                
+                <div class="header-form">
+                    <a href="javascript:history.back()" class="back-icon">&larr;</a>
+                    <div>
+                        <h1>FORM PEMESANAN</h1>
+                        <p>Silahkan masukkan detail pesanan Anda</p>
+                    </div>
+                </div>
+
+                <form id="orderForm" action="#">
+                    
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" required placeholder="Masukkan Nama Anda">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="table_number">No. Meja</label>
+                        <input type="text" id="table_number" name="table_number" placeholder="Masukkan Nomor Meja">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service_type">Take Away / Dine in</label>
+                        <select id="service_type" name="service_type" required>
+                            <option value="" disabled selected>Masukkan Pilihan Anda</option>
+                            <option value="Dine in">Dine in (Makan di Tempat)</option>
+                            <option value="Take Away">Take Away (Bawa Pulang)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-kirim">Kirim</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('orderForm');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Mencegah form submit default
+
+                // Ambil nilai dari input
+                const username = document.getElementById('username').value;
+                const tableNumber = document.getElementById('table_number').value;
+                const serviceType = document.getElementById('service_type').value;
+
+                // Validasi pilihan layanan
+                if (!serviceType || serviceType === "Masukkan Pilihan Anda") {
+                    alert('Mohon pilih jenis layanan (Take Away / Dine in) untuk melanjutkan.');
+                    return;
+                }
+
+                // 1. Buat objek data pesanan awal
+                const orderDetails = {
+                    username: username,
+                    table: tableNumber || 'N/A', 
+                    type: serviceType,
+                    timestamp: new Date().toISOString()
+                };
+
+                // 2. Simpan detail pesanan awal ke LocalStorage
+                localStorage.setItem('customerOrderDetails', JSON.stringify(orderDetails));
+
+                // 3. Beri notifikasi
+                alert(`Detail pesanan telah dicatat:
+- Nama: ${username}
+- Layanan: ${serviceType}
+- Meja: ${tableNumber || 'Tidak ada'}
+                
+Anda akan diarahkan ke Menu Kopi untuk memilih produk.`);
+
+                // 4. Arahkan pengguna ke halaman menu kopi
+                window.location.href = 'coffee.html'; 
+            });
+        });
+    </script>
+</body>
+</html>

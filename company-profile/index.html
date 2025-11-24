@@ -3,105 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COFFE TIME</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>COFFEE TIME - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+    // Hanya hapus keranjang dan detail pesanan jika Anda ingin 
+    // memulai sesi belanja baru dari halaman beranda (Home)
+    document.addEventListener('DOMContentLoaded', () => {
+        // Hapus data keranjang lama yang mungkin tertinggal
+        localStorage.removeItem('coffeeCart'); 
+        
+        // Hapus detail pemesanan pelanggan (agar wajib mengisi form lagi)
+        // HANYA JIKA ANDA INGIN FORM DIISI SETIAP KALI DARI HOME
+        // localStorage.removeItem('customerOrderDetails'); 
+    });
+</script>
 </head>
+<style>
+    * {
+    /* Menggunakan Poppins atau font sans-serif bersih lainnya */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Warna latar belakang utama seperti pada gambar */
+    background-color: #E5CDB4; 
+    color: #3A3A3A;
+    min-height: 100vh;
+}
+
+/* --- HEADER / NAVBAR --- */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 80px;
+    background-color: #ffffff; /* Navbar Putih Bersih */
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.08); /* Bayangan lembut seperti Shopee */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #704214;
+    text-decoration: none; /* Penting agar logo bisa menjadi link */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #3A3A3A;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-left: 30px;
+    padding: 5px 0;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-links .active {
+    color: #704214;
+    border-bottom: 2px solid #704214; /* Indikator halaman aktif */
+}
+
+.nav-links a:hover {
+    color: #704214;
+}
+
+/* --- HERO SECTION --- */
+
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 150px 80px 150px; /* Padding bawah lebih besar */
+    max-width: 1440px;
+    margin: 0 auto;
+    min-height: calc(100vh - 70px);
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 500px;
+    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #704214; /* Warna judul cokelat tua */
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.hero-content .tagline {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #3A3A3A;
+    text-emphasis: center;
+}
+
+.hero-content .description {
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    text-align: justify;
+}
+
+.btn-buy {
+    background-color: #F8D9A2; /* Warna tombol kuning muda/beige */
+    color: #704214; /* Warna teks tombol cokelat tua */
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-buy:hover {
+    background-color: #EED192;
+    transform: translateY(-2px);
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-image img {
+    /* Gaya untuk membuat kotak gambar menjadi 'aesthetic' dan menonjol */
+    width: 100%; 
+    max-width: 600px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    /* Memberi padding di dalam div hero-image untuk memberi ruang */
+    padding: 20px; 
+    background-color: #B99978; /* Warna latar belakang kotak gambar yang lebih gelap */
+}
+
+/* --- RESPONSIVENESS (Untuk tampilan mobile/tablet) --- */
+
+@media (max-width: 992px) {
+    .navbar {
+        padding: 20px 40px;
+    }
+    
+    .hero-section {
+        flex-direction: column;
+        padding: 50px 40px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        padding-right: 0;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-image {
+        justify-content: center;
+    }
+
+    .hero-image img {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+
+    .nav-links {
+        margin-top: 10px;
+    }
+
+    .nav-links a {
+        margin: 0 10px;
+    }
+
+    .hero-section {
+        padding: 30px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
+</style>
 <body>
 
-    <!-- NAVBAR -->
     <header class="navbar">
-        <div class="logo">COFFE<br>TIME</div>
+       <a href="index.html" class="logo">COFFEE TIME</a> 
         <nav class="nav-links">
-            <a href="#">HOME</a>
-            <a href="#">COFFEE</a>
-            <a href="#">BAKERY</a>
-            <a href="#">LOGIN</a>
-            <a href="#">ABOUT</a>
+            <a href="index.html">HOME</a>
+            <a href="coffee.html">COFFEE</a>
+            <a href="bakery.html">BAKERY</a>
+            <a href="order.html">ORDER</a>
+            <a href="about.html">ABOUT</a>
         </nav>
     </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero-section">
-        <div class="hero-container">
-
-            <div class="hero-text">
-                <h1>WELCOME!</h1>
-                <p>Kopi premium untuk di minum di pagi, siang, atau pun malam hari.</p>
-
-                <p class="subtext">
-                    Start Your Day With <br>
-                    The Perfect Brew
-                </p>
-
-                <p class="description">
-                    Kopi terbaik lahir dari biji pilihan dan proses sangrai yang cermat.
-                    Setiap cangkir menghadirkan cita rasa kaya dan aroma menggoda, ditemani
-                    roti dan kue artisan yang lembut untuk memulai atau menutup hari dengan sempurna.
-                </p>
-
-                <button class="buy-now-btn">BUY NOW</button>
-            </div>
-
-            <div class="hero-image">
-                <img src="https://i.pinimg.com/1200x/f4/b4/68/f4b468c720a97521602be6095de1abec.jpg" alt="Coffee Image">
-            </div>
-
+    <main class="hero-section">
+        <div class="hero-content">
+            <h1>WELCOME!</h1>
+            <p class="tagline">Kopi premium untuk diminum di pagi, siang, atau pun malam hari.</p>
+            <p class="tagline">Start Your Day With The Perfect Brew</p>
+            <p class="description">
+                Kopi terbaik lahir dari biji pilihan dan proses sangrai yang cermat. Setiap cangkir 
+                menghadirkan cita rasa kaya dan aroma menggoda, ditemani roti dan kue artisan yang lembut 
+                untuk memulai atau menutup hari dengan sempurna.
+            </p>
+            <a href="coffee.html" class="btn-buy">BUY NOW</a>
         </div>
-    </section>
-
-    <!-- COFFEE SECTION -->
-    <section class="coffee-section">
-        <h2>Coffee</h2>
-
-        <div class="card-container">
-
-            <div class="coffee-card">
-                <img src="https://i.pinimg.com/736x/85/23/a9/8523a90eb17613913dccebf8dd4f5bb4.jpg" alt="cappuccino">
-                <h3>Cup of cappuccino coffee</h3>
-                <p>A warm cup of cappuccino bliss.</p>
-
-                <div class="price-row">
-                    <span>Rp. 15.000,00</span>
-                    <button>Beli</button>
-                </div>
-            </div>
-
-            <div class="coffee-card">
-                <img src="https://i.pinimg.com/736x/46/71/10/4671108805d3c7ed55ce4e4fb957e7c4.jpg" alt="espresso">
-                <h3>Cup of espresso coffee</h3>
-                <p>Wake up with espresso power.</p>
-
-                <div class="price-row">
-                    <span>Rp. 15.000,00</span>
-                    <button>Beli</button>
-                </div>
-            </div>
-
-            <div class="coffee-card">
-                <img src="https://i.pinimg.com/736x/62/d5/e1/62d5e1828d3fd72153c030b8fda3925d.jpg" alt="americano">
-                <h3>Cup of americano coffee</h3>
-                <p>Classic Americano, timeless taste.</p>
-
-                <div class="price-row">
-                    <span>Rp. 17.000,00</span>
-                    <button>Beli</button>
-                </div>
-            </div>
-
-            <div class="coffee-card">
-                <img src="img/latte.jpg" alt="latte">
-                <h3>Cup of coffee latte</h3>
-                <p>A creamy cup of latte.</p>
-
-                <div class="price-row">
-                    <span>Rp. 22.000,00</span>
-                    <button>Beli</button>
-                </div>
-            </div>
-
+        <div class="hero-image">
+            <img src="path/to/your/image.jpg" alt="Secangkir kopi latte art dengan biji kopi dan kue di latar belakang">
         </div>
-    </section>
+    </main>
 
 </body>
 </html>
